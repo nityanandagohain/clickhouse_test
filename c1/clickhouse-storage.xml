@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<clickhouse>
+<storage_configuration>
+    <disks>
+        <default>
+            <keep_free_space_bytes>10485760</keep_free_space_bytes>
+        </default>
+        <gcs>
+            <support_batch_delete>false</support_batch_delete>
+            <type>s3</type>
+            <endpoint>https://storage.googleapis.com/nitya-t1/ch-data/</endpoint>
+            <access_key_id></access_key_id>
+            <secret_access_key></secret_access_key>
+        </gcs>
+   </disks>
+   <policies>
+       <tiered>
+           <volumes>
+                <default>
+                    <disk>default</disk>
+                </default>
+                <s3>
+                    <disk>gcs</disk>
+                    <perform_ttl_move_on_insert>0</perform_ttl_move_on_insert>
+                    <prefer_not_to_merge>0</prefer_not_to_merge>
+                </s3>
+            </volumes>
+        </tiered>
+    </policies>
+</storage_configuration>
+</clickhouse>
